@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mqtt-telemetry-svc-pod
+  labels:
+    app: mqtt-telemetry-svc
+spec:
+  containers:
+    - name: mqtt-telemetry-svc
+      image: ozankaplan/mqtt-telemetry-svc:latest
+      ports:
+        - containerPort: 80
+      env:
+        - name: MQTT_BROKER_URL
+          value: "mqtt://emqx-listeners.default.svc.cluster.local:1883"

@@ -1,1 +1,0 @@
-# mqtt-telemetry-svc

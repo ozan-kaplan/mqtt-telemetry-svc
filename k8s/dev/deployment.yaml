@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqtt-device-telemetry-deployment
+  labels:
+    team: development
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: mqtt-telemetry-svc
+          image: ozankaplan/mqtt-telemetry-svc:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MQTT_BROKER_URL
+              value: "mqtt://emqx-listeners.default.svc.cluster.local:1883"
